@@ -7,6 +7,11 @@ dotEnv.config();
 
 const port = process.env.PORT || 5000;
 const app = express();
+app.use(
+  express.urlencoded({
+    extended: true,
+  }));
+app.use(express.json());
 const uri = process.env.MONGO_ATLAS_URI || '';
 
 mongoose.connect(uri);
@@ -24,17 +29,13 @@ database.once('connected', () => {
   //vercel required this
   app.get("/", (req, res) => res.send("Express on Vercel Connected"));
 
-  //app.use("/api", userRouter);
+  app.use("/api", userRouter);
   app.listen(port, () => {
     console.log(`Server is connected with port: ${port}`);
   });
 });
 
-// app.use(
-//     express.urlencoded({
-//       extended: true,
-//     }));
-//app.use(express.json());
+
 //app.use(cors());
 
 
