@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 
 dotEnv.config();
 
-const port =  process.env.PORT || 5000;
+const port = process.env.PORT || 5000;
 const app = express();
 const uri = process.env.MONGO_ATLAS_URI || '';
 
@@ -13,19 +13,20 @@ mongoose.connect(uri);
 
 
 const database = mongoose.connection;
-//vercel required this
-app.get("/", (req, res) => res.send("Express on Vercel Connected"));
 
-app.use("v1/api", userRouter);
 
 database.on('error', (error) => {
-    console.log(error)
+  console.log(error)
 });
 
 database.once('connected', () => {
-    console.log('Database Connected');
-    app.listen(port, ()=>{
-      console.log(`Server is connected with port: ${port}`);
+  console.log('Database Connected');
+  //vercel required this
+  app.get("/", (req, res) => res.send("Express on Vercel Connected"));
+
+  //app.use("/api", userRouter);
+  app.listen(port, () => {
+    console.log(`Server is connected with port: ${port}`);
   });
 });
 
