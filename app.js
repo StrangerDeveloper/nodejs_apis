@@ -1,21 +1,39 @@
 const express = require("express");
-const app = express();
-const cors = require("cors");
 const dotEnv = require("dotenv");
-const routes = require("./routes/router");
+const userRouter = require("./routes/user.router");
+const mongoose = require("mongoose");
 
 dotEnv.config();
+
 const port =  process.env.PORT || 5000;
+const app = express();
+const uri = process.env.MONGO_ATLAS_URI || '';
 
-app.use(
-    express.urlencoded({
-      extended: true,
-    }));
-app.use(express.json());
-app.use(cors());
+mongoose.connect(uri);
 
-app.use("v1/api", routes);
 
-app.listen(port, ()=>{
-    console.log(`Server is connected with port: ${port}`);
+const database = mongoose.connection;
+
+app.use("v1/api", userRouter);
+
+database.on('error', (error) => {
+    console.log(error)
 });
+
+database.once('connected', () => {
+    console.log('Database Connected');
+    app.listen(port, ()=>{
+      console.log(`Server is connected with port: ${port}`);
+  });
+});
+
+// app.use(
+//     express.urlencoded({
+//       extended: true,
+//     }));
+//app.use(express.json());
+//app.use(cors());
+
+
+
+
