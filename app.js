@@ -11,7 +11,9 @@ app.use(
   express.urlencoded({
     extended: true,
   }));
+  // Middleware to parse JSON
 app.use(express.json());
+
 const uri = process.env.MONGO_ATLAS_URI || '';
 
 mongoose.connect(uri);
