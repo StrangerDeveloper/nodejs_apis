@@ -16,26 +16,38 @@ app.use(express.json());
 
 const uri = process.env.MONGO_ATLAS_URI || '';
 
-mongoose.connect(uri);
+//mongoose.connect(uri);
 
 
-const database = mongoose.connection;
+//const database = mongoose.connection;
 
-
-database.on('error', (error) => {
-  console.log(error)
-});
-
-database.once('connected', () => {
-  console.log('Database Connected');
-  //vercel required this
+// Connect to MongoDB
+mongoose.connect(uri).then(() => {
+  console.log('Connected to MongoDB');
   app.get("/", (req, res) => res.send("Express on Vercel Connected"));
 
   app.use("/api", userRouter);
   app.listen(port, () => {
     console.log(`Server is connected with port: ${port}`);
   });
+}).catch((err) => {
+  console.error('Failed to connect to MongoDB', err);
 });
+
+// database.on('error', (error) => {
+//   console.log(error)
+// });
+
+// database.once('connected', () => {
+//   console.log('Database Connected');
+//   //vercel required this
+//   app.get("/", (req, res) => res.send("Express on Vercel Connected"));
+
+//   app.use("/api", userRouter);
+//   app.listen(port, () => {
+//     console.log(`Server is connected with port: ${port}`);
+//   });
+// });
 
 
 //app.use(cors());
