@@ -13,6 +13,8 @@ mongoose.connect(uri);
 
 
 const database = mongoose.connection;
+//vercel required this
+app.get("/", (req, res) => res.send("Express on Vercel Connected"));
 
 app.use("v1/api", userRouter);
 
