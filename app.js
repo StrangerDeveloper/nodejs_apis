@@ -25,12 +25,6 @@ const uri = process.env.MONGO_ATLAS_URI || '';
 mongoose.connect(uri).then(() => {
   console.log('Connected to MongoDB');
   //app.get("/", (req, res) => res.send("Express on Vercel Connected"));
-
-  
-}).catch((err) => {
-  console.error('Failed to connect to MongoDB', err);
-});
-
 // Handle favicon.ico requests
 app.get('/favicon.ico', (req, res) => res.status(204));
 
@@ -39,6 +33,12 @@ app.use("/api", userRouter);
   app.listen(port, () => {
     console.log(`Server is connected with port: ${port}`);
   });
+  
+}).catch((err) => {
+  console.error('Failed to connect to MongoDB', err);
+});
+
+
 
 // database.on('error', (error) => {
 //   console.log(error)
