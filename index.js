@@ -1,6 +1,7 @@
 const express = require("express");
 const dotEnv = require("dotenv");
-//const userRouter = require("./routes/user.router");
+const config = require('./config/config');
+const userRouter = require("./routes/user.router");
 //const mongoose = require("mongoose");
 
 dotEnv.config();
@@ -14,12 +15,21 @@ app.get("/", (req, res) => {
   res.send("Express on Vercel");
 });
 
+
+
+const database = config.client;
+database.on('error', (error) => {
+  console.log(error)
+});
+
+app.use("/api", userRouter);
+
 app.listen(port, () => {
   console.log("Running on port 5000.");
 });
 
 // Export the Express API
-module.exports = app;
+//module.exports = app;
 
 // app.use(
 //   express.urlencoded({

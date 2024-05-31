@@ -10,7 +10,9 @@
   "author": "Adnan Ulhaq",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.19.2"
+    "bcryptjs": "^2.4.3",
+    "express": "^4.19.2",
+    "mongodb": "^6.7.0"
   },
   "devDependencies": {
     "dotenv": "^16.4.5"
