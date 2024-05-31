@@ -8,14 +8,25 @@ dotEnv.config();
 const port = process.env.PORT || 5000;
 const app = express();
 
-app.use(
-  express.urlencoded({
-    extended: true,
-  }));
-  // Middleware to parse JSON
-app.use(express.json());
+app.get("/", (req, res) => {
+  res.send("Express on Vercel");
+});
 
-const uri = process.env.MONGO_ATLAS_URI || '';
+app.listen(5000, () => {
+  console.log("Running on port 5000.");
+});
+
+// Export the Express API
+module.exports = app;
+
+// app.use(
+//   express.urlencoded({
+//     extended: true,
+//   }));
+  // Middleware to parse JSON
+//app.use(express.json());
+
+//const uri = process.env.MONGO_ATLAS_URI || '';
 
 //mongoose.connect(uri);
 
@@ -23,24 +34,24 @@ const uri = process.env.MONGO_ATLAS_URI || '';
 //const database = mongoose.connection;
 
 // Connect to MongoDB
-mongoose.connect(uri).then(() => {
-  console.log('Connected to MongoDB');
-  app.get("/", (req, res) => res.send("Express on Vercel Connected"));
-// Handle favicon.ico requests
-app.get('/favicon.ico', (req, res) => res.status(204));
+// mongoose.connect(uri).then(() => {
+//   console.log('Connected to MongoDB');
+//   app.get("/", (req, res) => res.send("Express on Vercel Connected"));
+// // Handle favicon.ico requests
+// app.get('/favicon.ico', (req, res) => res.status(204));
 
-app.use("/api", userRouter);
+// app.use("/api", userRouter);
 
-  app.listen(port, () => {
-    console.log(`Server is connected with port: ${port}`);
-  });
+//   app.listen(port, () => {
+//     console.log(`Server is connected with port: ${port}`);
+//   });
   
-}).catch((err) => {
-  console.error('Failed to connect to MongoDB', err);
-});
+// }).catch((err) => {
+//   console.error('Failed to connect to MongoDB', err);
+// });
 
 // Export the Express API
-module.exports = app;
+//module.exports = app;
 
 
 // database.on('error', (error) => {
