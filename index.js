@@ -7,12 +7,14 @@ dotEnv.config();
 
 const port = process.env.PORT || 5000;
 const app = express();
+  // Middleware to parse JSON
+app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("Express on Vercel");
 });
 
-app.listen(5000, () => {
+app.listen(port, () => {
   console.log("Running on port 5000.");
 });
 
