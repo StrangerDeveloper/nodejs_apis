@@ -12,9 +12,9 @@ dotEnv.config();
 // Middleware to parse JSON
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("Express on Vercel");
-});
+// app.get("/", (req, res) => {
+//   res.send("Express on Vercel");
+// });
 
 
 
@@ -45,11 +45,11 @@ const database = mongoose.connection;
 // Connect to MongoDB
 mongoose.connect("mongodb+srv://adnan_es_node:qkDGpfDHjTQGCNgD@clusternodeapis.ouujwyu.mongodb.net/?retryWrites=true&w=majority&appName=ClusterNodeApis").then(() => {
   console.log('Connected to MongoDB');
- // app.get("/", (req, res) => res.send("Express on Vercel Connected"));
+ app.get("/", (req, res) => res.send("Express on Vercel Connected"));
   // Handle favicon.ico requests
   app.get('/favicon.ico', (req, res) => res.status(204).send('favicon not found'));
 
-  app.use("/api", userRouter);
+ // app.use("/api", userRouter);
 
   app.listen(port, () => {
     console.log(`Server is connected with port: ${port}`);
