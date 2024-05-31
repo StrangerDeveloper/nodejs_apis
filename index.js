@@ -39,6 +39,8 @@ app.use("/api", userRouter);
   console.error('Failed to connect to MongoDB', err);
 });
 
+// Export the Express API
+module.exports = app;
 
 
 // database.on('error', (error) => {
