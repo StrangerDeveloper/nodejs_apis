@@ -25,7 +25,7 @@ const uri = process.env.MONGO_ATLAS_URI || '';
 // Connect to MongoDB
 mongoose.connect(uri).then(() => {
   console.log('Connected to MongoDB');
-  //app.get("/", (req, res) => res.send("Express on Vercel Connected"));
+  app.get("/", (req, res) => res.send("Express on Vercel Connected"));
 // Handle favicon.ico requests
 app.get('/favicon.ico', (req, res) => res.status(204));
 
