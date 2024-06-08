@@ -2,12 +2,15 @@ const express = require("express");
 const dotEnv = require("dotenv");
 const userRouter = require("./routes/user.router");
 const mongoose = require("mongoose");
+const functions = require("firebase-functions");
+
+dotEnv.config();
 
 const port = process.env.PORT || 5000;
 const uri = process.env.MONGO_ATLAS_URI || '';
 const app = express();
 
-dotEnv.config();
+
 
 // Middleware to parse JSON
 app.use(express.json());
@@ -49,7 +52,7 @@ mongoose.connect("mongodb+srv://adnan_es_node:qkDGpfDHjTQGCNgD@clusternodeapis.o
   // Handle favicon.ico requests
   app.get('/favicon.ico', (req, res) => res.status(204).send('favicon not found'));
 
- // app.use("/api", userRouter);
+  app.use("/api", userRouter);
 
   app.listen(port, () => {
     console.log(`Server is connected with port: ${port}`);
@@ -66,6 +69,9 @@ mongoose.connect("mongodb+srv://adnan_es_node:qkDGpfDHjTQGCNgD@clusternodeapis.o
 database.on('error', (error) => {
   console.log(error)
 });
+
+
+exports.api = functions.https.onRequest(app);
 
 // database.once('connected', () => {
 //   console.log('Database Connected');

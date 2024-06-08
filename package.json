@@ -5,16 +5,29 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint .",
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "deploy": "firebase deploy --only functions:api"
+  },
+  "engines": {
+    "node": ">=18"
   },
   "author": "Adnan Ulhaq",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "express": "^4.19.2",
+    "firebase-admin": "^12.1.1",
+    "firebase-functions": "^5.0.1",
     "mongoose": "^8.4.0"
   },
   "devDependencies": {
-    "dotenv": "^16.4.5"
-  }
+    "dotenv": "^16.4.5",
+    "eslint": "^9.4.0",
+    "@eslint/js": "^0.1.5",
+    "@eslint/eslintrc": "^1.4.0"
+  },
+  "private": true
 }
