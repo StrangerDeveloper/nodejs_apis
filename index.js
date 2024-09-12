@@ -6,7 +6,7 @@ const functions = require("firebase-functions");
 
 dotEnv.config();
 
-const port = process.env.PORT || 5000;
+//const internalPort = process.env.INTERNAL_PORT || 5000;
 const uri = process.env.MONGO_ATLAS_URI || '';
 const app = express();
 
@@ -46,17 +46,18 @@ app.use(
 const database = mongoose.connection;
 
 // Connect to MongoDB
-mongoose.connect("mongodb+srv://adnan_es_node:qkDGpfDHjTQGCNgD@clusternodeapis.ouujwyu.mongodb.net/?retryWrites=true&w=majority&appName=ClusterNodeApis").then(() => {
+//mongodb+srv://adnan_es_node:qkDGpfDHjTQGCNgD@clusternodeapis.ouujwyu.mongodb.net/?retryWrites=true&w=majority&appName=ClusterNodeApis
+mongoose.connect(uri).then(() => {
   console.log('Connected to MongoDB');
- app.get("/", (req, res) => res.send("Express on Vercel Connected"));
+ app.get("/", (req, res) => res.send("Express on Firebase Connected"));
   // Handle favicon.ico requests
-  app.get('/favicon.ico', (req, res) => res.status(204).send('favicon not found'));
+  //app.get('/favicon.ico', (req, res) => res.status(204).send('favicon not found'));
 
-  app.use("/api", userRouter);
+  app.use("/v1", userRouter);
 
-  app.listen(port, () => {
-    console.log(`Server is connected with port: ${port}`);
-  });
+  // app.listen(port, () => {
+  //   console.log(`Server is connected with port: ${port}`);
+  // });
 
 }).catch((err) => {
   console.error('Failed to connect to MongoDB', err);
@@ -66,9 +67,9 @@ mongoose.connect("mongodb+srv://adnan_es_node:qkDGpfDHjTQGCNgD@clusternodeapis.o
 //module.exports = app;
 
 
-database.on('error', (error) => {
-  console.log(error)
-});
+// database.on('error', (error) => {
+//   console.log(error)
+// });
 
 
 exports.api = functions.https.onRequest(app);
