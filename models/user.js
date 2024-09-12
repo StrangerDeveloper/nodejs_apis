@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
  
 const dbSchema = mongoose.Schema({
     name: String,
-    email: {
+    phone: {
         type: String,
         required: true,
     },
@@ -10,8 +10,11 @@ const dbSchema = mongoose.Schema({
         type: String,
         required: true,
     },
-    store_location: String,
-    location_id: String,
+    //store_location: String,
+    //location_id: String,
+    address: String,
+    email: String,
+   
     time_stamp: {
         type: Date,
         default: Date.now(),
