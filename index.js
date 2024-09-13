@@ -43,7 +43,7 @@ app.use(
 //mongoose.connect(uri);
 
 
-const database = mongoose.connection;
+//const database = mongoose.connection;
 
 // Connect to MongoDB
 //mongodb+srv://adnan_es_node:qkDGpfDHjTQGCNgD@clusternodeapis.ouujwyu.mongodb.net/?retryWrites=true&w=majority&appName=ClusterNodeApis
