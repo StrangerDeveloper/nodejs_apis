@@ -1,6 +1,7 @@
 const express = require("express");
 const dotEnv = require("dotenv");
-const userRouter = require("./routes/user.router");
+//const userRouter = require("./routes/user.router");
+const routers= require("./routes/router");
 const mongoose = require("mongoose");
 const functions = require("firebase-functions");
 
@@ -53,8 +54,8 @@ mongoose.connect(uri).then(() => {
   // Handle favicon.ico requests
   //app.get('/favicon.ico', (req, res) => res.status(204).send('favicon not found'));
 
-  app.use("/v1", userRouter);
-
+ // app.use("/v1", userRouter);
+  app.use("/v1", routers);
   // app.listen(port, () => {
   //   console.log(`Server is connected with port: ${port}`);
   // });
