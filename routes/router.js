@@ -1,5 +1,5 @@
 const express = require("express");
-const userRouter = require("./routes/user.router");
+const userRouter = require("./user.router");
 //const bcrypt  = require("bcryptjs");
 //const uuid = require("uuid");
 //const jwt = require("jsonwebtoken");
